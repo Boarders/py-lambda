@@ -19,7 +19,7 @@ class Lam (Expr):
         if self.var in body_fvs:
             body_fvs.remove(self.var)
         return body_fvs
-    
+
     def subst(self, v, arg):
         body = self.body
         free_vars = arg.fvs()
@@ -49,12 +49,13 @@ class Lam (Expr):
             head = stack[0]
             tail = stack[1:]
             return (body.subst(var,head).spine(tail))
-            
+
 
 class App (Expr):
     def __init__(self, fun, arg):
         self.fun = fun
         self.arg = arg
+
     def __str__(self):
         return (str(self.fun) + " " + str(self.arg))
 
@@ -71,7 +72,7 @@ class App (Expr):
         arg = self.arg
         return fun.spine([arg] + stack)
 
-    
+
 class Var (Expr):
     def __init__(self, var):
         self.var = var
@@ -94,8 +95,8 @@ class Var (Expr):
         for arg in stack:
             acc = App(acc, nf(arg))
         return acc
-            
-            
+
+
 def nf(lam):
     return lam.spine([])
 
