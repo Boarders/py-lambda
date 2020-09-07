@@ -1,9 +1,7 @@
 import ply.yacc as yacc
 
-
 from lex import tokens
 from expression import Lam, App, Var
-
 
 
 def p_lam_expr(p):
@@ -33,11 +31,11 @@ def p_atom_var(p):
 
 parser = yacc.yacc()
 
-while True:
-    try:
-        s = input('lam > ')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+# while True:
+#     try:
+#         s = input('lam > ')
+#     except EOFError:
+#         break
+#     if not s: continue
+#     result = parser.parse(s)
+#     print(result)

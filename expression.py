@@ -111,4 +111,5 @@ msz = App (App(m,s), z)
 add = Lam ("n", (Lam("m", Lam("s", (Lam("z", App(App(n, s), msz)))))))
 four = nf(App(App(add, two), two))
 eight = nf(App(App(add, four), four))
-print(eight)
+# test expression
+# print(eight)

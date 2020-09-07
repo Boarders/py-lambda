@@ -43,15 +43,15 @@ class Lexer(object):
             break      # No more input
         print(tok)
 
-      
-data = '''
--- comment
-\ b . ( b c d )
-'''
-
-l = Lexer()
-l.build()
-l.test(data)
+# quick test apparatus    
+# data = '''
+# -- comment
+# \ b . ( b c d )
+# '''
+# 
+# l = Lexer()
+# l.build()
+# l.test(data)
 
 
 
