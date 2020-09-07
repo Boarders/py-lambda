@@ -1,17 +1,22 @@
 import ply.lex as lex
 
-
-class Lexer(object):
-    
-  tokens = [
+tokens = [
       'LAM',
       'DOT',
       'VAR',
+      'LPAR',
+      'RPAR',     
       ]
+  
+class Lexer(object):
+  tokens = tokens
+
   alpha = r'[a-z][A-Z]'
   var = r'alpha\w+'
   t_LAM = r'\\'
   t_VAR = r'[a-zA-Z]\w*'
+  t_LPAR = r'\('
+  t_RPAR = r'\)'
 
   t_DOT = r'\.'
   
@@ -41,7 +46,7 @@ class Lexer(object):
       
 data = '''
 -- comment
-\ b . b c d
+\ b . ( b c d )
 '''
 
 l = Lexer()
