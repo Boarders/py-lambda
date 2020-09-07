@@ -1,3 +1,5 @@
+from functools import reduce
+
 def app(set1,set2):
     s = set1
     s.union(set2)
@@ -90,11 +92,8 @@ class Var (Expr):
             return(Var(self.var))
 
     def spine(self, stack):
-        var = self.var
-        acc = Var(var)
-        for arg in stack:
-            acc = App(acc, nf(arg))
-        return acc
+        unf = lambda acc, x : App (acc, nf(x))
+        return reduce (unf, stack, Var(self.var))
 
 
 def nf(lam):
