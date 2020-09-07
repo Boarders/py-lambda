@@ -1,5 +1,6 @@
 from functools import reduce
 from dataclasses import dataclass
+from collections import deque
 
 def app(set1,set2):
     s = set1
@@ -47,8 +48,8 @@ class Lam (Expr):
         if len(stack) == 0:
             return (Lam (var, nf(body)))
         else:
-            head = stack[0]
-            tail = stack[1:]
+            head = stack.pop()
+            tail = stack
             return (body.subst(var,head).spine(tail))
 
 @dataclass
@@ -70,7 +71,8 @@ class App (Expr):
     def spine(self,stack):
         fun = self.fun
         arg = self.arg
-        return fun.spine([arg] + stack)
+        stack.append(arg)
+        return fun.spine(stack)
 
 @dataclass
 class Var (Expr):
@@ -94,7 +96,8 @@ class Var (Expr):
 
 
 def nf(lam):
-    return lam.spine([])
+    d = deque()
+    return lam.spine(d)
 
 z = Var("z")
 s = Var("s")
