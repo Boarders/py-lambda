@@ -1,4 +1,5 @@
 from functools import reduce
+from dataclasses import dataclass
 
 def app(set1,set2):
     s = set1
@@ -8,10 +9,10 @@ def app(set1,set2):
 class Expr:
     pass
 
+@dataclass
 class Lam (Expr):
-    def __init__(self, var, body):
-        self.var = var
-        self.body = body
+    var : str
+    body : Expr
 
     def __str__(self):
         return ("(\\" + str(self.var) + " . " + str(self.body) + ")")
@@ -52,11 +53,10 @@ class Lam (Expr):
             tail = stack[1:]
             return (body.subst(var,head).spine(tail))
 
-
+@dataclass
 class App (Expr):
-    def __init__(self, fun, arg):
-        self.fun = fun
-        self.arg = arg
+    fun : Expr
+    arg : Expr
 
     def __str__(self):
         return (str(self.fun) + " " + str(self.arg))
@@ -74,10 +74,9 @@ class App (Expr):
         arg = self.arg
         return fun.spine([arg] + stack)
 
-
+@dataclass
 class Var (Expr):
-    def __init__(self, var):
-        self.var = var
+    var : str
 
     def __str__(self):
          return self.var
