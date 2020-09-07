@@ -18,10 +18,8 @@ class Lam (Expr):
         return ("(\\" + str(self.var) + " . " + str(self.body) + ")")
 
     def fvs(self):
-        body_fvs = self.body.fvs()
-        if self.var in body_fvs:
-            body_fvs.remove(self.var)
-        return body_fvs
+        fvs = { fv for fv in self.body.fvs() if fv != self.var}
+        return fvs
 
     def subst(self, v, arg):
         body = self.body
