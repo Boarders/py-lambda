@@ -14,7 +14,7 @@ class PyRepl(cmd.Cmd):
         return True
     def do_quit(self, arg):
         'Exit the repl'
-        print('Thank your lambdas!')
+        print('Thank you for your lambdas!')
         return True
 
     def default(self,line):
